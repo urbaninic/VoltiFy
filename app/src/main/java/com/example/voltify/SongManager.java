@@ -1,5 +1,7 @@
 package com.example.voltify;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class SongManager {
@@ -11,10 +13,12 @@ public class SongManager {
         songs = new ArrayList<Song>();
     }
 
-    public void addSong(Song s)
+    public boolean addSong(Song song)
     {
-        songs.add(s);
+        songs.add(song);
+        // Segue controllo per verificare la corretta aggiunta all'arraylist
+        return ! songs.isEmpty();
     }
 
-
+desp
 }

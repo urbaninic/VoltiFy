@@ -8,15 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    // Dichiarazioni
     EditText txtSongTitle;
     EditText txtSongAuthor;
     EditText txtSongLength;
     Spinner spnGenere;
     Button btnAddSong;
     Button btnShowPlaylist;
-    String[] genres = {"Seleziona un Genere","Pop", "Indie", "Rap"};
+    final String GENREPLACEHOLDER = "Seleziona un Genere";
+    String[] genres = {GENREPLACEHOLDER, "Pop", "Indie", "Rap"};
     ArrayAdapter<String> adapterGenres; // fa da intermediario tra oggetto spinner array statico genres
     SongManager songManager = new SongManager(); // Riferimento a SongManager.java
 
@@ -36,8 +39,26 @@ public class MainActivity extends AppCompatActivity {
     {
         btnAddSong.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // fill
+            public void onClick(View v)
+            {
+                String songTitle = txtSongTitle.getText().toString();
+                String songAuthor = txtSongAuthor.getText().toString();
+                String songLength = txtSongLength.getText().toString();
+                // get text + tostring;
+                String songGenre = spnGenere.getSelectedItem().toString();
+                if(stringValidation(songTitle, songAuthor, songLength, songGenre))
+                {
+                    // se vero, istanzio un nuovo oggetto SONG
+                    Song song = new Song(songTitle, songAuthor, songGenre, songLength);
+                    if(songManager.addSong(song)){
+                        Toast.makeText(getApplicationContext(), "Song added!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    // se falso, invio un toast
+                    Toast.makeText(getApplicationContext(),"Fill the fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -49,11 +70,17 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
+    public boolean stringValidation(String songTitle, String songAuthor, String songLength, String spnGenre)
+    {
+        return !(songTitle.isEmpty() || songAuthor.isEmpty() || songLength.isEmpty() || spnGenre.equals(GENREPLACEHOLDER));
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Chiamate di funzioni
         componentInitialization();
         listenersInitialization();
