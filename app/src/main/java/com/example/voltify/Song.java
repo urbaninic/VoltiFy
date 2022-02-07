@@ -47,8 +47,12 @@ public class Song {
         this.length = length;
     }
 
-
-
+    @Override
+    // classe Song eredita metodo toString da classe padre (classe Oblject)
+    public String toString()
+    {
+        return "Titolo: "+title+" "+"Autore: "+author+" "+"Genere: "+genre+" "+"Durata: "+length;
+    }
 
 
 

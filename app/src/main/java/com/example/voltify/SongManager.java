@@ -19,4 +19,17 @@ public class SongManager {
         // Segue controllo per verificare la corretta aggiunta all'arraylist
         return ! songs.isEmpty();
     }
+
+    public String getSongsInfos()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (Song song : songs)
+        // per ogni elemento song di songs:
+        {
+            sb.append(song.toString());
+            sb.append("\n");
+        }
+        //Accorpamento in uunica stringa in stringbuilder
+        return sb.toString();
+    }
 }

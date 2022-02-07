@@ -2,7 +2,9 @@ package com.example.voltify;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     String[] genres = {GENREPLACEHOLDER, "Pop", "Indie", "Rap"};
     ArrayAdapter<String> adapterGenres; // fa da intermediario tra oggetto spinner array statico genres
     SongManager songManager = new SongManager(); // Riferimento a SongManager.java
+    Intent intentPlaylist;
 
     private void componentInitialization()
     {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         btnShowPlaylist = findViewById(R.id.btnShowPlaylist);
         adapterGenres = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, genres);
         spnGenere.setAdapter(adapterGenres); // collegamento fatto ADAPTER-ARRAY
+
+        intentPlaylist = new Intent(getApplicationContext(), PlaylistActivity.class);
     }
 
     private void listenersInitialization()
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     // se falso, invio un toast
                     Toast.makeText(getApplicationContext(),"Fill the fields", Toast.LENGTH_SHORT).show();
+                    Log.d(MainActivity.class.getName(), "manca un campo");
                 }
             }
         });
@@ -65,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
         btnShowPlaylist.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // fill
+
+                intentPlaylist.putExtra("songsInfos", songManager.getSongsInfos());
+                startActivity(intentPlaylist);
             }
         }));
     }
