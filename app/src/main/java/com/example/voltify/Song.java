@@ -2,10 +2,10 @@ package com.example.voltify;
 
 public class Song {
 
-    String title;
-    String author;
-    String genre;
-    String length;
+    private String title;
+    private String author;
+    private String genre;
+    private String length;
 
     public Song (String title, String author, String genre, String length)
     {

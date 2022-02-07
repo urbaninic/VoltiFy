@@ -14,17 +14,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     // Dichiarazioni
-    EditText txtSongTitle;
-    EditText txtSongAuthor;
-    EditText txtSongLength;
-    Spinner spnGenere;
-    Button btnAddSong;
-    Button btnShowPlaylist;
-    final String GENREPLACEHOLDER = "Seleziona un Genere";
-    String[] genres = {GENREPLACEHOLDER, "Pop", "Indie", "Rap"};
-    ArrayAdapter<String> adapterGenres; // fa da intermediario tra oggetto spinner array statico genres
-    SongManager songManager = new SongManager(); // Riferimento a SongManager.java
-    Intent intentPlaylist;
+    private EditText txtSongTitle;
+    private EditText txtSongAuthor;
+    private EditText txtSongLength;
+    private  Spinner spnGenere;
+    private Button btnAddSong;
+    private Button btnShowPlaylist;
+    private final String GENREPLACEHOLDER = "Seleziona un Genere";
+    private String[] genres = {GENREPLACEHOLDER, "Pop", "Indie", "Rap"};
+    private ArrayAdapter<String> adapterGenres; // fa da intermediario tra oggetto spinner array statico genres
+    private SongManager songManager = new SongManager(); // Riferimento a SongManager.java
+    private Intent intentPlaylist;
 
     private void componentInitialization()
     {

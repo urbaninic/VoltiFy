@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SongManager {
     // Tipo         - NomeArray = new Tipo;
-    ArrayList<Song> songs;
+    private ArrayList<Song> songs;
 
     public SongManager()
     {
